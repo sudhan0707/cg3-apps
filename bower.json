@@ -1,0 +1,11 @@
+{
+  "name": "questionbank",
+  "description": "",
+  "main": "index.js",
+  "license": "ISC",
+  "homepage": "",
+  "dependencies": {
+    "angular": "1.5.0",
+    "angular-mocks": "1.5.0"
+  }
+}
