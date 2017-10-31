@@ -8,5 +8,11 @@ module.exports = function(app){
         .get(controller.getQuestions)
         .post(controller.saveQuestion);
 
+    app.route("/api/admin/question/:questionId")
+        .put(controller.updateQuestion)
+        .get(controller.getQuestionById)
+        .delete(controller.deleteQuestionById);
+
+    app.param('questionId', controller.questionId);
 
 };
