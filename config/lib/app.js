@@ -1,13 +1,24 @@
 'use strict';
 
-var express = require('./express');
+var express = require('./express'),
+mongoose = require('./mongoose');
 
 module.exports.start = function(callback){
-    var app = express.init();
 
-    var _port = 8081;
+    this.init(function(app, db){
 
-    app.listen(_port, function(){
-        console.log("Application is listening on port : " + _port);
+        var _port = 8081;
+
+        app.listen(_port, function(){
+            console.log("Application is listening on port : " + _port);
+        });
+    });
+
+};
+
+module.exports.init = function(callback){
+    mongoose.connect(function (db){
+        var app = express.init(db);
+        if(callback) callback(app, db);
     });
 };

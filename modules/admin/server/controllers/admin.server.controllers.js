@@ -1,12 +1,31 @@
 'use strict';
 
+var mongoose = require('mongoose'),
+    Question = mongoose.model("Question");
+
 var questions = [];
 module.exports.getQuestions = function(request, response){
-    response.send(questions);
+    Question.find({}, function(err, questions){
+        if(err){
+            response.send("Error while fetching questions");
+        } else {
+            response.send(questions);
+        }
+    });
 };
 
 module.exports.saveQuestion = function(request, response){
-    var incomingQuestion = request.body;
+    var question = new Question(request.body);
+
+    question.save(function(err){
+        if(err)
+            response.send("Error while save question, Please try again later");
+        else
+            response.send(" Question is saved successfully");
+
+    });
+
+  /*  var incomingQuestion = request.body;
     console.log(request.body);
     ///..
     var successFlag = true;
@@ -21,7 +40,7 @@ module.exports.saveQuestion = function(request, response){
     });
     if(!successFlag) return;
     questions.push(incomingQuestion);
-    response.send("Success !!");
+    response.send("Success !!");*/
 
 };
 
