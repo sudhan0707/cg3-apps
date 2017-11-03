@@ -17,7 +17,12 @@ var QuestionSchema = new Schema({
     answer:{
        type: String,
         default: ''
+    },
+    rank:{
+       type:Number,
+        default:0
     }
+
 });
 
 mongoose.model("Question", QuestionSchema);

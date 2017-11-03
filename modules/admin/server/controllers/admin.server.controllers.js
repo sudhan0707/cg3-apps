@@ -44,24 +44,22 @@ module.exports.saveQuestion = function(request, response){
 
 };
 
-module.exports.updateQuestion = function(request, response){
-    var incomingQuestion = request.body,
-        incomingQuestionIdForUpdate = request.questionId;
+module.exports.updateQuestion = function(request, response) {
+    var incomingQuestion = request.body;
+    var incomingQuestionId = request.questionId;
 
-    var isSuccessfullyUpdated = false;
-
-    questions.forEach(function (question, index){
-        if(question.id == incomingQuestionIdForUpdate){
-            questions[index] = incomingQuestion;
-            isSuccessfullyUpdated = true;
+    Question.findOneAndUpdate(incomingQuestionId,{$set:incomingQuestion},function (err, data) {
+        if(err){
+            response.send("Unable to update record !!");
+        } else {
+            response.send("successfully updated record " + JSON.stringify(incomingQuestion));
         }
     });
-    if(isSuccessfullyUpdated){
-        response.send("Successfully updated question for id - "+ incomingQuestionIdForUpdate);
-    }else{
-        response.send("Could not find question for id - "+ incomingQuestionIdForUpdate);
-    }
+
+
 };
+
+
 
 module.exports.getQuestionById = function(request, response){
     var incomingQuestionId = request.questionId;

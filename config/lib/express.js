@@ -13,13 +13,6 @@ module.exports.init = function(db){
     this.initModels(app,db);
     this.initModulesServerRoutes(app);
 
-    app.route('/test')
-        .get(function(req, res){
-            res.send("Hello World !!") ;
-        })
-        .post(function(req, res){
-            res.send("Hello World !!") ;
-        });
 
     return app;
 

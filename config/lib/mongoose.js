@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 
 module.exports.connect = function(callback){
 
-    var db = mongoose.connect("mongodb://10.0.0.6:27017/local", {
+    var db = mongoose.connect("mongodb://localhost:27017/local", {
         user:'', pass:''
     }, function(err){
        if(err){
